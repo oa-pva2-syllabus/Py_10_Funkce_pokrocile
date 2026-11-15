@@ -1,26 +1,44 @@
-# Hodnocení zakázky
+# A – Hodnocení zakázky
 
 Obchodníci v naší softwarové firmě používají jednoduchý systém, aby odhadli šanci na úspěch potenciální zakázky.
-  
-Každé zakázce přiřadí body od 0 do 10 a platí:
-* Pokud má zakázka méně než 5 bodů, šance na záskání je malá.
-* Pokud má zakázka 6 až 8 bodů, šance na získání je střední.
-* Pokud má zakázka více bodů, šance na získání je vysoká.
+Každé zakázce přidělí 0 až 10 bodů podle těchto kritérií:
 
-Body přidělují podle následujících kritérií:
-* Odvětví: Firma nejlépe prodává do automotive, o něco hůře do retailu.
-Pokud potenciální zákazník podniká v automotive, přičti 3 body, pokud v retailu,
-   přičti 2 bod, jinak 0.
-* Obrat: Firma nejlépe prodává zákazníkům se středním obratem. U malých většinou neuspěje,
-u velkých občas ano. Pokud má firma obrat menší než 10 mil. Euro, přičti 0. Pokud je mezi
-  10 a 1 000 mil. Euro, přičti 3 body, jinak 1 bod.
-* Země: Firma je nejúspěšnější v Česku a na Slovensku (2 body), o něco méně v Německu a ve Francii (1 bod).
-  Ostatním zemím dej 0.
-* Konference: Firma loni pořádala odbornou konferenci pro zákazníky. Pokud se zákazník konference
-účastnil, přičti 1 bod, jinak 0.
-* Newsletter: Firma též rozesílá newsletter o svém produktu. Pokud zákazník newsletter odebírá,
-přičti 1 bod.
-  
-Deklaruj funkci, které bude mít 5 parametrů, které reprezentují zadaná kritéria. Poslední dvě
-kritéria zadej jako nepovinná s výchozí hodnotou `False`. Funkce vrátí šanci na získání zakázky
-jako řetězec.
+| Kritérium | Body |
+|---|---|
+| **Odvětví:** `"automotive"` | 3 |
+| **Odvětví:** `"retail"` | 2 |
+| **Odvětví:** jiné | 0 |
+| **Obrat** (v milionech eur): méně než 10 | 0 |
+| **Obrat:** od 10 do 1 000 včetně | 3 |
+| **Obrat:** více než 1 000 | 1 |
+| **Země:** `"CZ"` nebo `"SK"` | 2 |
+| **Země:** `"DE"` nebo `"FR"` | 1 |
+| **Země:** jiná | 0 |
+| **Konference:** zákazník se loni účastnil konference firmy | 1 |
+| **Newsletter:** zákazník odebírá newsletter firmy | 1 |
+
+Šance na získání zakázky podle bodů:
+
+| Body | Šance |
+|---|---|
+| 0 až 5 | `"malá"` |
+| 6 až 8 | `"střední"` |
+| 9 a 10 | `"vysoká"` |
+
+## Úkol
+
+Výpočet rozdělte do tří funkcí v souboru `zakazka.py`. Každá funkce má docstring.
+
+1. `bodyZakazky(odvetvi: str, obrat: float, zeme: str, konference: bool = False, newsletter: bool = False) -> int`
+
+   Vrátí počet bodů zakázky. Poslední dvě kritéria jsou nepovinná s výchozí hodnotou `False`.
+
+2. `sanceZakazky(body: int) -> str`
+
+   Vrátí šanci na získání zakázky podle počtu bodů: `"malá"`, `"střední"` nebo `"vysoká"`.
+
+3. `hodnoceniZakazky(odvetvi: str, obrat: float, zeme: str, konference: bool = False, newsletter: bool = False) -> str`
+
+   Vrátí šanci na získání zakázky. Sama nic nepočítá, jen zavolá obě předchozí funkce.
+
+Pod funkce napište hlavní program, který vyhodnotí několik zakázek a výsledky vypíše. U nepovinných kritérií vyzkoušejte i pojmenované argumenty, například `hodnoceniZakazky("retail", 500, "CZ", newsletter=True)`.
